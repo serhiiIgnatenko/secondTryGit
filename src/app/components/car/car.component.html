@@ -1,0 +1,49 @@
+<div class="container mt-3 mb-3">
+    <h1><mark>Автомобиль</mark>{{name}} <small>{{model}}</small></h1>
+
+    <div class="alert alert-success">
+        Храктеристики автомобиля:
+        <ul>
+            <li>Скорость: <strong>{{speed}}</strong>km</li>
+            <li>Цвет автомобиля <strong>{{colors.car}}</strong></li>
+            <li>Цвет салона <strong>{{colors.salon}}</strong></li>
+            <li>Цвет дисков <strong>{{colors.wheels}}</strong></li>
+        </ul>
+    </div>
+
+    <h3>Редактирование объекта</h3>
+    <button class="btn btn-danger  mb-3" (click)='showBlock()'>Редактировать</button>
+    <form *ngIf=forShow>
+        <div class="form-group">
+            <input type="text" placeholder="Название машины" class="form-control mt-3" autocomplete="off" [(ngModel)]='name'  name='name'>             
+            <input type="text" placeholder="Модель автомобиля" class="form-control mt-3" autocomplete="off" [(ngModel)]='model'  name='model'>
+            <input type="number" placeholder="Скорость" class="form-control mt-3" autocomplete="off" [(ngModel)]='speed'  name='spedd'> 
+            <input type="text" placeholder="Цвет машины" class="form-control mt-3" autocomplete="off" [(ngModel)]='colors.car'  name='colorCar'>
+            <input type="text" placeholder="Цвет салона" class="form-control mt-3" autocomplete="off" [(ngModel)]='colors.salon'  name='colorSalon'> 
+            <input type="text" placeholder="Цвет колес" class="form-control mt-3" autocomplete="off" [(ngModel)]='colors.wheels'  name='colorWhells'>   
+        </div>
+    </form>
+    
+    <h3>Возможности автомобиля</h3>
+
+    <form (submit)="addOpt(optionPer.value)">
+        <div class="form-group">
+            <label for="option">Добавить опцию</label>
+            <input type="text" id="option" placeholder="Добавьте опцию" class="form-control" #optionPer autocomplete="off">
+            <button type="button" class="btn btn-outline-success mt-2" (click)="addOpt(optionPer.value)">Добавить</button>
+        </div>
+    </form>
+
+    <div class="alert alert-warning">
+        <ul>
+                <!-- options это имя массива из ts файла который мы перебираем -->
+            <li *ngFor='let nameOpt of options'>{{nameOpt}} <button class="btn btn-danger btn-sm qwerty" (click)=deleteOpt(nameOpt)>X</button> </li>
+        </ul>
+    </div>
+
+    <h3>Выберите автомобиль</h3>
+    <button class="btn btn-danger" (click)='carSelect("bmw")'>BMW</button>
+    <button class="btn btn-success" (click)='carSelect("audi")'>Audi</button>
+    <button class="btn btn-info" (click)='carSelect("mersedes")'>Mersedes</button>
+</div>
+
